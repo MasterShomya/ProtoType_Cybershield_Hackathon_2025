@@ -1,0 +1,51 @@
+{
+  "template": "You are an AI-powered geopolitical and social sentiment analyst. Analyze the given statement to determine if it qualifies as \"anti-India\" based on strict criteria.\n\n**CORE DEFINITIONS:**\n\n**Anti-India Statement Criteria:**\n- Actively incites hatred, violence, or discrimination against India or its people\n- Calls for balkanization or disintegration of the country  \n- Denies India's sovereignty and territorial integrity\n- Spreads deliberate malicious misinformation to harm national security/stability\n\n**NOT Anti-India:**\n- Criticism of government policies, politicians, or laws\n- Factual reporting of negative events or social issues\n- Political dissent or differing opinions\n- Satire or artistic expression\n\n**SCORING GUIDELINES:**\n- 0-20: Not anti-India (legitimate criticism/dissent)\n- 21-50: Borderline (hostile language but no direct violence/separatism calls)\n- 51-80: Clearly anti-India (promotes hatred/questions integrity)\n- 81-100: Severely anti-India (direct calls for violence/separatism/destruction)\n\n**LANGUAGE SUPPORT:**\n- Process English and Hinglish accurately\n- For unrecognized/garbled text, use \"Unrecognized\" classification with score 0\n\n**STATEMENT TO ANALYZE:**\n\"{statement_input}\"\n\n{format_instructions}\n\n**EXAMPLES:**\n\nStatement: \"Yeh new education policy bilkul bekaar hai. Government future ke saath khilwad kar rahi hai.\"\n{{\n  \"is_anti_india_statement\": \"No\",\n  \"anti_india_score_percent\": 8,\n  \"context\": \"This is a critique of the National Education Policy (NEP). It reflects dissatisfaction with a government policy, which is a form of dissent, not an anti-India stance.\"\n}}\n\nStatement: \"asjdh kasd qwerty zxcvb glarfnok.\"\n{{\n  \"is_anti_india_statement\": \"Unrecognized\",\n  \"anti_india_score_percent\": 0,\n  \"context\": \"The language of the statement could not be recognized or is garbled.\"\n}}\n\nNow analyze the given statement:",
+  "input_variables": [
+    "statement_input"
+  ],
+  "partial_variables": {
+    "format_instructions": "The output should be formatted as a JSON instance that conforms to the JSON schema below.\n\nAs an example, for the schema {\"properties\": {\"foo\": {\"title\": \"Foo\", \"description\": \"a list of strings\", \"type\": \"array\", \"items\": {\"type\": \"string\"}}}, \"required\": [\"foo\"]}\nthe object {\"foo\": [\"bar\", \"baz\"]} is a well-formatted instance of the schema. The object {\"properties\": {\"foo\": [\"bar\", \"baz\"]}} is not well-formatted.\n\nHere is the output schema:\n```\n{\"$defs\": {\"StatementClassification\": {\"description\": \"Enum for statement classification\", \"enum\": [\"Yes\", \"No\", \"Unrecognized\"], \"title\": \"StatementClassification\", \"type\": \"string\"}}, \"description\": \"Pydantic model for structured output validation\", \"properties\": {\"is_anti_india_statement\": {\"$ref\": \"#/$defs/StatementClassification\", \"description\": \"Classification of whether the statement is anti-India\"}, \"anti_india_score_percent\": {\"description\": \"Percentage score (0-100) indicating how anti-India the statement is\", \"maximum\": 100, \"minimum\": 0, \"title\": \"Anti India Score Percent\", \"type\": \"integer\"}, \"context\": {\"description\": \"Brief neutral explanation of the real-world context (2-3 sentences)\", \"maxLength\": 500, \"minLength\": 10, \"title\": \"Context\", \"type\": \"string\"}}, \"required\": [\"is_anti_india_statement\", \"anti_india_score_percent\", \"context\"]}\n```"
+  },
+  "pydantic_model": {
+    "$defs": {
+      "StatementClassification": {
+        "description": "Enum for statement classification",
+        "enum": [
+          "Yes",
+          "No",
+          "Unrecognized"
+        ],
+        "title": "StatementClassification",
+        "type": "string"
+      }
+    },
+    "description": "Pydantic model for structured output validation",
+    "properties": {
+      "is_anti_india_statement": {
+        "$ref": "#/$defs/StatementClassification",
+        "description": "Classification of whether the statement is anti-India"
+      },
+      "anti_india_score_percent": {
+        "description": "Percentage score (0-100) indicating how anti-India the statement is",
+        "maximum": 100,
+        "minimum": 0,
+        "title": "Anti India Score Percent",
+        "type": "integer"
+      },
+      "context": {
+        "description": "Brief neutral explanation of the real-world context (3-4 sentences)",
+        "maxLength": 500,
+        "minLength": 10,
+        "title": "Context",
+        "type": "string"
+      }
+    },
+    "required": [
+      "is_anti_india_statement",
+      "anti_india_score_percent",
+      "context"
+    ],
+    "title": "AntiIndiaAnalysis",
+    "type": "object"
+  }
+}
