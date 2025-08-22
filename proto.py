@@ -119,4 +119,3 @@ if submit_button and text_input:
 # --- Footer ---
 st.markdown("---")
 st.caption("Threat Hunters | Hackathon Prototype")
-�
