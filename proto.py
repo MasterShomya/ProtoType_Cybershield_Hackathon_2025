@@ -52,7 +52,7 @@ st.title("🛡️ Threat Hunters")
 st.subheader("Anti-India Statement Detection Prototype")
 st.markdown("---")
 
-st.info("This tool uses AI to analyze text for potential anti-India sentiment. Enter a statement below to receive a verdict, a sentiment score, and the context for the analysis.", icon="🤖")
+st.info("This tool uses AI to analyze text for potential anti-India sentiment. Enter a statement below to receive a verdict, a sentiment score, and the context for the analysis.")
 
 with st.form(key='analysis_form'):
     text_input = st.text_area(
@@ -119,3 +119,4 @@ if submit_button and text_input:
 # --- Footer ---
 st.markdown("---")
 st.caption("Threat Hunters | Hackathon Prototype")
+
