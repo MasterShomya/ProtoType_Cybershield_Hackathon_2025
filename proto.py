@@ -43,10 +43,12 @@ with st.form(key='analysis_form'):
 # --- Backend Logic ---
 def parse_llm_output(result_content):
     """
-    Parses the raw text output from the LLM to extract Verdict, Score, and Context.
+    Parses the raw text output from the LLM to extract Verdict, Score, and Context
+    based on the detailed prompt template.
     """
-    verdict_match = re.search(r"Verdict: (Yes|No)", result_content, re.IGNORECASE)
-    score_match = re.search(r"Score: (\d+)", result_content)
+    # Updated regex to match the keys from your prompt template
+    verdict_match = re.search(r"Is_Anti_India_Statement: (Yes|No|Unrecognized)", result_content, re.IGNORECASE)
+    score_match = re.search(r"Anti_India_Score_Percent: (\d+)", result_content)
     context_match = re.search(r"Context: (.*)", result_content, re.DOTALL)
 
     verdict = verdict_match.group(1).strip() if verdict_match else "N/A"
@@ -70,11 +72,14 @@ if submit_button and text_input:
     col1, col2 = st.columns(2)
     
     with col1:
-        if parsed_data["verdict"].lower() == "yes":
+        verdict_lower = parsed_data["verdict"].lower()
+        if verdict_lower == "yes":
             st.error(f"**Verdict: Anti-India**")
-        else:
+        elif verdict_lower == "no":
             st.success(f"**Verdict: Not Anti-India**")
-    
+        else: # Handles "Unrecognized" or "N/A"
+            st.warning(f"**Verdict: {parsed_data['verdict']}**")
+
     with col2:
         st.metric(
             label="Anti-India Score",
