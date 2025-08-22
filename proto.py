@@ -29,7 +29,8 @@ st.title("🛡️ Threat Hunters")
 st.subheader("Anti-India Statement Detection Prototype")
 st.markdown("---")
 
-st.info("This tool uses AI to analyze text for potential anti-India sentiment. Enter a statement below to receive a verdict, a sentiment score, and the context for the analysis.", icon="�")
+# CORRECTED LINE: Replaced the invalid character with the correct robot emoji.
+st.info("This tool uses AI to analyze text for potential anti-India sentiment. Enter a statement below to receive a verdict, a sentiment score, and the context for the analysis.", icon="🤖")
 
 # Use a form for better input management
 with st.form(key='analysis_form'):
