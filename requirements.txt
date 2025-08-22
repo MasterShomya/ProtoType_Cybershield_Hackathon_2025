@@ -1,7 +1,5 @@
+langchain-core
+langchain-groq
 streamlit
-langchain
-langchain-community
-langchain-huggingface
 python-dotenv
-transformers
-huggingface_hub
+pydantic
